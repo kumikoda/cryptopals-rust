@@ -28,8 +28,14 @@ fn as_hex(c: u8) -> u8 {
     }
 }
 
+
+/*
+ * Hex string to base64 string
+ * - every hex char is 4 bits
+ * - every base64 char is 6 bits
+ * so we can take every 6 hex chars and convert it into 4 base64 chars
+ */
 fn hex_to_base64(s: &str) -> String {
-    // Overall strategy, 3 bytes --> 32 bits --> base 64
     let mut chars = Vec::new();
 
     // Convert the slice of string to a slice of bytes
