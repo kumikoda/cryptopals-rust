@@ -1,6 +1,6 @@
 extern crate cryptopals;
 
-use cryptopals::conversions::{hex, base64, hex_to_base64};
+use cryptopals::{hex, base64, conversions};
 
 #[test]
 fn set1_problem1() {
@@ -11,7 +11,7 @@ fn set1_problem1() {
     let hex_bytes: Vec<u8> = hex::decode(hex_chars);
 
     // Convert to base64 bytes
-    let base64_bytes: Vec<u8> = hex_to_base64(hex_bytes);
+    let base64_bytes: Vec<u8> = conversions::hex_to_base64(hex_bytes);
 
     // Encode as base64 chars
     let base64_chars: Vec<u8> = base64::encode(base64_bytes);
