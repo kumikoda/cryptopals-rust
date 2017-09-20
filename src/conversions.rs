@@ -1,9 +1,8 @@
 pub fn hex_to_base64(hex_bytes: Vec<u8>) -> Vec<u8> {
-    // strategy: for every three hex (4bits) we create two base64 (6 bits)
-
     // pad with 0's until divisible by 3
-    if hex_bytes.len() % 3 != 0 {
-        println!("HAHA");
+    let mut hex_bytes = hex_bytes;
+    while hex_bytes.len() % 3 != 0 {
+        hex_bytes.push(0);
     }
 
     // vector to hold final output
@@ -12,12 +11,13 @@ pub fn hex_to_base64(hex_bytes: Vec<u8>) -> Vec<u8> {
     // container for 3*4 bits
     let mut buff = 0u16;
 
+    // for every three hex (4bits) we create two base64 (6 bits)
     for (i, &hex) in hex_bytes.iter().enumerate() {
-        // shift hex (4 bits) in from the right
+        // shift hex to buffer from the right
         buff <<= 4;
         buff += hex as u16;
 
-        // once we did it three times...
+        // once we did it thre times...
         if (i + 1) % 3 == 0 {
             // take most significant six as first base64
             b64_bytes.push(((buff & 0b111111000000) >> 6) as u8);
@@ -30,11 +30,17 @@ pub fn hex_to_base64(hex_bytes: Vec<u8>) -> Vec<u8> {
         }
     }
 
+
+
     return b64_bytes;
 }
 
 #[cfg(test)]
 mod tests {
+    use super::hex_to_base64;
+
     #[test]
-    fn test_hex_to_base64() {}
+    fn test_hex_to_base64() {
+        // write a good test!
+    }
 }
