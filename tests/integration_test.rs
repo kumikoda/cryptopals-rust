@@ -18,3 +18,13 @@ fn set1_problem1() {
 
     assert_eq!(output, expected);
 }
+
+#[test]
+fn set1_problem2() {
+    let input1 = "1c0111001f010100061a024b53535009181c";
+    let input2 = "686974207468652062756c6c277320657965";
+
+    let output = hex::fixed_xor(input1, input2);
+
+    let expected = String::from("746865206b696420646f6e277420706c6179");
+}

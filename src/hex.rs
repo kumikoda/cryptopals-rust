@@ -31,6 +31,25 @@ pub fn decode(s: &str) -> Vec<u8> {
     return packed_bytes;
 }
 
+pub fn fixed_xor(s1: &str, s2: &str) -> String {
+    let bytes1 = s1.as_bytes().to_vec();
+    let bytes2 = s2.as_bytes().to_vec();
+
+    let mut res = Vec::new();
+
+    if bytes1.len() != bytes2.len() {
+        panic!("invalid inputs: s1 and s2 must be same length");
+    }
+
+    for i in 0..bytes1.len() {
+        println!("{}", i);
+        res.push(bytes1[i] ^ bytes2[i]);
+    }
+
+    return String::from_utf8(res).unwrap();
+
+}
+
 #[cfg(test)]
 mod tests {
     use super::decode;
