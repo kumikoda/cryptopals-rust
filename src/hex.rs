@@ -27,6 +27,7 @@ pub fn decode(s: &str) -> Vec<u8> {
             buff <<= 4;
         }
     }
+
     return packed_bytes;
 }
 

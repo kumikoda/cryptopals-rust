@@ -10,17 +10,11 @@ fn set1_problem1() {
     let bytes: Vec<u8> = hex::decode(input);
 
     // Encode as base64
-    let base64_bytes: Vec<u8> = conversions::hex_to_base64(bytes);
+    let output: String = base64::encode(bytes);
 
-    // Encode as base64 chars
-    //let base64_chars: Vec<u8> = base64::encode(base64_bytes);
+    let expected = String::from(
+        "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t",
+    );
 
-    // Bytes to string
-    //let output: String = String::from_utf8(base64_chars).unwrap();
-
-    //let expected = String::from(
-    //  "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t",
-    //);
-
-    //assert!(output == expected)
+    assert_eq!(output, expected);
 }
