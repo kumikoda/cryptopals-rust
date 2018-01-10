@@ -31,23 +31,23 @@ pub fn decode(s: &str) -> Vec<u8> {
     return packed_bytes;
 }
 
-pub fn fixed_xor(s1: &str, s2: &str) -> String {
-    let bytes1 = s1.as_bytes().to_vec();
-    let bytes2 = s2.as_bytes().to_vec();
+pub fn encode(bytes: Vec<u8>) -> String {
+    let mut encoded = Vec::new();
 
-    let mut res = Vec::new();
-
-    if bytes1.len() != bytes2.len() {
-        panic!("invalid inputs: s1 and s2 must be same length");
+    for (i, &b) in bytes.iter().enumerate() {
+        encoded.push(encode_one((b & 0b11110000) >> 4));
+        encoded.push(encode_one(b & 0b00001111));
     }
 
-    for i in 0..bytes1.len() {
-        println!("{}", i);
-        res.push(bytes1[i] ^ bytes2[i]);
+    String::from_utf8(encoded).unwrap()
+}
+
+fn encode_one(b: u8) -> u8 {
+    match b {
+        0...9 => b + b'0',
+        10...15 => b - 10 + b'a',
+        _ => panic!("invalid hex value: {}", b),
     }
-
-    return String::from_utf8(res).unwrap();
-
 }
 
 #[cfg(test)]

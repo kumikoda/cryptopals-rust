@@ -25,7 +25,6 @@ pub fn encode(bytes: Vec<u8>) -> String {
     }
 
     for i in encoded.len() - to_pad..encoded.len() {
-        println!("{}", i);
         encoded[i] = b'=';
     }
 
